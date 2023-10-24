@@ -7,5 +7,5 @@ commonLabels:
   app: streamwizard-backend-minecraft
 
 commonAnnotations:
-  app: streamwizard-backend-spotifyapi-minecraft
+  app: streamwizard-backend-minecraft
 
