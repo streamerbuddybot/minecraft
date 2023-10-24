@@ -35,7 +35,7 @@ class minecraft {
     ];
 
     //randob amount between 1 and 20
-    const amount = Math.floor(Math.random() * 20) + 1;
+    const amount = Math.floor(Math.random() * 100) + 1;
 
     //get random mob
 
@@ -51,9 +51,10 @@ class minecraft {
     const players = ["Jochemwite", "Mo_de_olie_sjeik"];
     //get random player
     const randomPlayer = players[Math.floor(Math.random() * players.length)];
+    const randomamount = Math.floor(Math.random() * amount) + 1;
 
     const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
-      command: `spawnmob ${mob} ${amount} ${randomPlayer}`,
+      command: `spawnmob ${mob} ${randomamount} ${randomPlayer}`,
     });
 
     return randomPlayer;
@@ -81,7 +82,6 @@ class minecraft {
       "FALLING_SPIDERS",
       "FIREWORKS",
       "LOOK_AT_ENDER",
-      "LOOK_DOWN",
       "LOOK_DOWN",
       "SOMETHING_INSIDE",
       "SPINNING_MOBS",
@@ -234,6 +234,15 @@ class minecraft {
     });
 
     return "jumpscare_welcome_home";
+  }
+
+  //SOMETHING_INSIDE
+  async something_inside() {
+    const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
+      command: `scare @p SOMETHING_INSIDE`,
+    });
+
+    return "something_inside";
   }
 }
 
