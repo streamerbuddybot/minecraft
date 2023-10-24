@@ -239,7 +239,7 @@ class minecraft {
   //SOMETHING_INSIDE
   async something_inside() {
     const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
-      command: `scare @p SOMETHING_INSIDE`,
+      command: `scare @a SOMETHING_INSIDE`,
     });
 
     return "something_inside";
