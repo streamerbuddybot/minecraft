@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streamwizard-backend-minecraft
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: streamwizard-backend-minecraft
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled  # This annotation enables automatic injection
+      labels:
+        app: streamwizard-backend-minecraft
+    spec:
+      containers:
+        - name: streamwizard-backend-spotifyapi
+          image: ghcr.io/streamerbuddybot/minecraft:d09b335a0454d33173b2153c0824d9a546a8c575
+          ports:
+            - containerPort: 80
+          envFrom:
+            - secretRef:
+                name: streamwizard-backend
+          volumeMounts:
+            - name: grpc-dns
+              mountPath: /usr/src/app/config.json
+              subPath: config.json
+              readOnly: true
+      volumes:
+        - name: grpc-dns
+          configMap:
+            name: grpc-dns
