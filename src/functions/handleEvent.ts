@@ -39,7 +39,7 @@ export default async function handleEvent(eventData: MinecraftAction): Promise<s
       return door;
 
     case "jumpscare_spinningmob":
-      const spinningmob = await minecraftAPI.jumpscare_spinning_player();
+      const spinningmob = await minecraftAPI.jumpscare_spinning_mobs();
       return spinningmob;
 
     case "jumpscare_spinningplayer":
@@ -71,11 +71,11 @@ export default async function handleEvent(eventData: MinecraftAction): Promise<s
       return frogs;
 
     case "spawn_chicken":
-      const chicken = await minecraftAPI.spawnMob("spawn_chicken", 1000);
+      const chicken = await minecraftAPI.spawnMob("chicken", 1000);
       return chicken;
 
     case "spawn_zombie":
-      const zombie = await minecraftAPI.spawnMob("spawn_chicken", 100);
+      const zombie = await minecraftAPI.spawnMob("zombie", 100);
       return zombie;
 
     case "spawn_skeleton":
