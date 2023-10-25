@@ -4,9 +4,6 @@ export default async function handleEvent(eventData: MinecraftAction): Promise<s
   console.log(eventData);
 
   switch (eventData.action) {
-    case "nuke":
-      await minecraftAPI.nuke();
-      return eventData.message;
     case "randomscare":
       const scare = await minecraftAPI.randomJumpscare();
       return scare;
@@ -64,37 +61,35 @@ export default async function handleEvent(eventData: MinecraftAction): Promise<s
 
     case "spawn_bee":
       const bees = await minecraftAPI.spawnMob("bee", 1000);
-      return bees;
+      return `spawned ${bees.amount} bees on ${bees.randomPLayer} player`;
 
     case "spawn_frog":
       const frogs = await minecraftAPI.spawnMob("frog", 1000);
-      return frogs;
+      return `spawned ${frogs.amount} ${frogs.amount} on ${frogs.randomPLayer} player`;
 
     case "spawn_chicken":
       const chicken = await minecraftAPI.spawnMob("chicken", 1000);
-      return chicken;
+      return `spawned ${chicken.amount} chicken on ${chicken.randomPLayer} player`;
 
     case "spawn_zombie":
       const zombie = await minecraftAPI.spawnMob("zombie", 100);
-      return zombie;
+      return `spawned ${zombie.amount} zombie on ${zombie.randomPLayer} player`;
 
     case "spawn_skeleton":
       const skeleton = await minecraftAPI.spawnMob("skeleton", 100);
-      return skeleton;
+      return `spawned ${skeleton.amount} skeleton on ${skeleton.randomPLayer} player`;
 
     case "spawn_blaze":
       const blaze = await minecraftAPI.spawnMob("blaze", 100);
-      return blaze;
+      return `spawned ${blaze.amount} blaze on ${blaze.randomPLayer} player`;
 
     case "spawn_random":
-      const creeper = await minecraftAPI.randomMob();
-      return creeper;
+      const randomMob = await minecraftAPI.randomMob();
+      return `spawned ${randomMob.amount} ${randomMob.mob} on ${randomMob.randomPLayer} player`;
 
     case "nuke":
       const random = await minecraftAPI.nuke();
-      return random;
-
-    
+      return `NUKE INCOMING!`;
 
     default:
       return "minecraft action not found";

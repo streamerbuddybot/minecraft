@@ -9,7 +9,11 @@ class minecraft {
   }
 
   //spawn random mob
-  async randomMob() {
+  async randomMob(): Promise<{
+    mob: string;
+    amount: number;
+    randomPLayer: string;
+  }> {
     const mobs = [
       "zombie",
       "skeleton",
@@ -34,7 +38,7 @@ class minecraft {
       "zombie_pigman",
     ];
 
-    //randob amount between 1 and 20
+    //randob amount between 1 and 100
     const amount = Math.floor(Math.random() * 100) + 1;
 
     //get random mob
@@ -43,11 +47,22 @@ class minecraft {
 
     const res = await this.spawnMob(mob, amount);
 
-    return `${amount} ${mob} spawned at ${res}`;
+    return {
+      amount: res.amount,
+      mob: res.mob,
+      randomPLayer: res.randomPLayer,
+    };
   }
 
   //spawn mob
-  async spawnMob(mob: string, amount: number) {
+  async spawnMob(
+    mob: string,
+    amount: number
+  ): Promise<{
+    mob: string;
+    amount: number;
+    randomPLayer: string;
+  }> {
     const players = ["Jochemwite", "Mo_de_olie_sjeik"];
     //get random player
     const randomPlayer = players[Math.floor(Math.random() * players.length)];
@@ -57,7 +72,11 @@ class minecraft {
       command: `spawnmob ${mob} ${randomamount} ${randomPlayer}`,
     });
 
-    return randomPlayer;
+    return {
+      mob,
+      amount,
+      randomPLayer: randomPlayer,
+    };
   }
 
   //nuke
