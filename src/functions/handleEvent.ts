@@ -65,7 +65,7 @@ export default async function handleEvent(eventData: MinecraftAction): Promise<s
 
     case "spawn_frog":
       const frogs = await minecraftAPI.spawnMob("frog", 1000);
-      return `spawned ${frogs.amount} ${frogs.amount} on ${frogs.randomPLayer} player`;
+      return `spawned ${frogs.amount} ${frogs.mob} on ${frogs.randomPLayer} player`;
 
     case "spawn_chicken":
       const chicken = await minecraftAPI.spawnMob("chicken", 1000);
