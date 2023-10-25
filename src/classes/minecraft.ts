@@ -23,7 +23,7 @@ class minecraft {
       "witch",
       "blaze",
       "slime",
-      "magma_cube",
+      "magmacube",
       "silverfish",
       "phantom",
       "drowned",
@@ -31,11 +31,11 @@ class minecraft {
       "stray",
       "vindicator",
       "pillager",
-      "zombie_villager",
+      "zombievillager",
       "evoker",
       "vex",
       "villager",
-      "zombie_pigman",
+      "pigman",
     ];
 
     //randob amount between 1 and 100
