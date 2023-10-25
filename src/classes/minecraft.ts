@@ -74,7 +74,7 @@ class minecraft {
 
     return {
       mob,
-      amount,
+      amount: randomamount,
       randomPLayer: randomPlayer,
     };
   }
