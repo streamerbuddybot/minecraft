@@ -1,4 +1,7 @@
 import { pterodactylAPI } from "../axios/pterodactyl";
+import randomItems from "../data/MinecraftItems.json";
+
+const players = ["Jochemwite", "Mo_de_olie_sjeik"];
 
 class minecraft {
   //kill all hostile mobs
@@ -6,6 +9,12 @@ class minecraft {
     const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
       command: `killall hostile`,
     });
+  }
+
+  randomPlayer() {
+    const randomPlayer = players[Math.floor(Math.random() * players.length)];
+
+    return randomPlayer;
   }
 
   //spawn random mob
@@ -262,6 +271,38 @@ class minecraft {
     });
 
     return "something_inside";
+  }
+
+  //get a random minecraft item
+  async randomItem(amount: number) {
+    const randomItem = randomItems[Math.floor(Math.random() * randomItems.length)];
+    const randomAmount = Math.floor(Math.random() * amount) + 1;
+    const randomPlayer = this.randomPlayer();
+
+    console.log(randomItem, randomAmount, randomPlayer);
+
+    const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
+      command: `give ${randomPlayer} ${randomItem.name} ${randomAmount}`,
+    });
+
+    return {
+      item: randomItem,
+      amount: randomAmount,
+      players: randomPlayer,
+    };
+  }
+
+  //kill random player
+  async killPlayer() {
+    const randomPlayer = this.randomPlayer();
+
+    const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
+      command: `kill ${randomPlayer}`,
+    });
+
+    return {
+      player: randomPlayer,
+    };
   }
 }
 

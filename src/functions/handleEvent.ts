@@ -71,6 +71,22 @@ export default async function handleEvent(eventData: MinecraftAction): Promise<s
       const chicken = await minecraftAPI.spawnMob("chicken", 1000);
       return `spawned ${chicken.amount} chicken on ${chicken.randomPLayer} player`;
 
+    case "spawn_creeper":
+      const creeper = await minecraftAPI.spawnMob("creeper", 100);
+      return `spawned ${creeper.amount} creepers on ${creeper.randomPLayer} player`;
+
+    case "spawn_dolphin":
+      const dolphin = await minecraftAPI.spawnMob("dolphin", 1000);
+      return `spawned ${dolphin.amount} dolphins on ${dolphin.randomPLayer} player`;
+
+    case "spawn_ghast":
+      const ghast = await minecraftAPI.spawnMob("ghast", 100);
+      return `spawned ${ghast.amount} ${ghast.mob} on ${ghast.randomPLayer} player`;
+
+    case "spawn_goat":
+      const goat = await minecraftAPI.spawnMob("goat", 1000);
+      return `spawned ${goat.amount} ${goat.mob} on ${goat.randomPLayer} player`;
+
     case "spawn_zombie":
       const zombie = await minecraftAPI.spawnMob("zombie", 100);
       return `spawned ${zombie.amount} zombie on ${zombie.randomPLayer} player`;
@@ -90,6 +106,14 @@ export default async function handleEvent(eventData: MinecraftAction): Promise<s
     case "nuke":
       const random = await minecraftAPI.nuke();
       return `NUKE INCOMING!`;
+
+    case "random_item":
+      const item = await minecraftAPI.randomItem(64);
+      return `gifted ${item.item.name} (${item.amount}) to ${item.players} player`;
+
+    case "random_kill":
+      const kill = await minecraftAPI.killPlayer();
+      return `killed ${kill.player} player`;
 
     default:
       return "minecraft action not found";
