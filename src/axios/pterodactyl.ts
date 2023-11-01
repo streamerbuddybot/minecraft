@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig, RawAxiosRequestHeaders } from "axios";
 
-
 const pterodactylAPI = axios.create({
   baseURL: "https://panel.amrio.nl/api",
   headers: {
@@ -10,10 +9,6 @@ const pterodactylAPI = axios.create({
   },
 });
 
-//spotify request interceptor
-
-
-// Response interceptor for spotify API calls
 pterodactylAPI.interceptors.response.use(
   (response) => {
     return response;
@@ -24,7 +19,6 @@ pterodactylAPI.interceptors.response.use(
     const originalRequest = error.config;
 
     console.log(error.response.data);
-  
   }
 );
 
