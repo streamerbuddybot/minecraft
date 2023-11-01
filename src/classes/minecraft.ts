@@ -279,7 +279,6 @@ class minecraft {
     const randomAmount = Math.floor(Math.random() * amount) + 1;
     const randomPlayer = this.randomPlayer();
 
-    console.log(randomItem, randomAmount, randomPlayer);
 
     const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
       command: `give ${randomPlayer} ${randomItem.name} ${randomAmount}`,
