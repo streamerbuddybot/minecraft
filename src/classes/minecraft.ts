@@ -279,7 +279,6 @@ class minecraft {
     const randomAmount = Math.floor(Math.random() * amount) + 1;
     const randomPlayer = this.randomPlayer();
 
-
     const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
       command: `give ${randomPlayer} ${randomItem.name} ${randomAmount}`,
     });
@@ -302,6 +301,30 @@ class minecraft {
     return {
       player: randomPlayer,
     };
+  }
+  async wind() {
+    const randomPlayer = this.randomPlayer();
+
+    const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
+      command: `disasters start extremewinds 3 ${randomPlayer} `,
+    });
+
+    return randomPlayer
+  }
+
+  async torando() {
+    const randomPlayer = this.randomPlayer();
+
+    const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
+      command: `disasters start tornado 3 ${randomPlayer} `,
+    });
+  }
+  async supernova() {
+    const randomPlayer = this.randomPlayer();
+
+    const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
+      command: `disasters start supernova 1 ${randomPlayer} `,
+    });
   }
 }
 
