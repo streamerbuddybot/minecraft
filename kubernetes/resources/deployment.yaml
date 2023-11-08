@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: streamwizard-backend-minecraft
-          image: ghcr.io/streamerbuddybot/minecraft:f29cc5da58c733db39fa44a527e3be22b166a03e
+          image: ghcr.io/streamerbuddybot/minecraft:cac4e571aeeafd07e6af1b8fbdb617264c6519fe
           ports:
             - containerPort: 80
           envFrom:
