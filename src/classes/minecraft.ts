@@ -318,6 +318,8 @@ class minecraft {
     const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
       command: `disasters start tornado 3 ${randomPlayer} `,
     });
+
+    return randomPlayer
   }
   async supernova() {
     const randomPlayer = this.randomPlayer();
@@ -325,6 +327,8 @@ class minecraft {
     const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
       command: `disasters start supernova 1 ${randomPlayer} `,
     });
+
+    return randomPlayer
   }
 }
 
