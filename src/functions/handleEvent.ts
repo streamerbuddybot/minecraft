@@ -113,24 +113,26 @@ export default async function handleEvent(eventData: MinecraftAction): Promise<s
 
     case "random_kill":
       const kill = await minecraftAPI.killPlayer();
-      return `killed ${kill.player} player`;      
+      return `killed ${kill.player} player`;
 
-
-    case "wind": 
-      const wind = await minecraftAPI.wind()
-      return `a heavy wind is about to start at ${wind}`
+    case "wind":
+      const wind = await minecraftAPI.wind();
+      return `a heavy wind is about to start at ${wind}`;
 
     case "torando":
-      const tornado = await minecraftAPI.torando()
-      return  `a tornado is about to start at ${tornado}`
+      const tornado = await minecraftAPI.torando();
+      return `a tornado is about to start at ${tornado}`;
 
-    case "supernova" :
-      const supernova = await minecraftAPI.supernova()
-      return `${supernova} you need to run for your life!`
+    case "supernova":
+      const supernova = await minecraftAPI.supernova();
+      return `${supernova} you need to run for your life!`;
 
-
+    case "yeet":
+      const fiftyfifty = minecraftAPI.fiftyFifty(eventData.username);
+      return fiftyfifty
 
     default:
+      console.log("sada")
       return "minecraft action not found";
   }
 }

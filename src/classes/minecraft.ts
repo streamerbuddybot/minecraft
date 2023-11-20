@@ -3,6 +3,58 @@ import randomItems from "../data/MinecraftItems.json";
 
 const players = ["Jochemwite", "Mo_de_olie_sjeik"];
 
+type Enchantment = {
+  name: string;
+  level: number;
+};
+
+// Define type for an enchanted book
+type EnchantedBook = {
+  [key: string]: Enchantment;
+};
+
+const enchantedBooks: EnchantedBook[] = [
+  { unbreaking: { name: "unbreaking", level: 5 } },
+  { efficiency: { name: "efficiency", level: 5 } },
+  { silktouch: { name: "silktouch", level: 1 } },
+  { fortune: { name: "fortune", level: 3 } },
+  { power: { name: "power", level: 5 } },
+  { punch: { name: "punch", level: 2 } },
+  { flame: { name: "flame", level: 1 } },
+  { infinity: { name: "infinity", level: 1 } },
+  { sharpness: { name: "sharpness", level: 5 } },
+  { smite: { name: "smite", level: 5 } },
+  { bane_of_arthropods: { name: "bane_of_arthropods", level: 5 } },
+  { knockback: { name: "knockback", level: 2 } },
+  { fire_aspect: { name: "fire_aspect", level: 2 } },
+  { looting: { name: "looting", level: 3 } },
+  { sweeping: { name: "sweeping", level: 3 } },
+  { efficiency: { name: "efficiency", level: 5 } },
+  { fortune: { name: "fortune", level: 3 } },
+  { aqua_affinity: { name: "aqua_affinity", level: 1 } },
+  { respiration: { name: "respiration", level: 3 } },
+  { depth_strider: { name: "depth_strider", level: 3 } },
+  { feather_falling: { name: "feather_falling", level: 4 } },
+  { blast_protection: { name: "blast_protection", level: 4 } },
+  { fire_protection: { name: "fire_protection", level: 4 } },
+  { projectile_protection: { name: "projectile_protection", level: 4 } },
+  { protection: { name: "protection", level: 4 } },
+  { thorns: { name: "thorns", level: 3 } },
+  { frost_walker: { name: "frost_walker", level: 2 } },
+  { mending: { name: "mending", level: 1 } },
+  { curse_of_binding: { name: "curse_of_binding", level: 1 } },
+  { curse_of_vanishing: { name: "curse_of_vanishing", level: 1 } },
+  { lure: { name: "lure", level: 3 } },
+  { luck_of_the_sea: { name: "luck_of_the_sea", level: 3 } },
+  { channeling: { name: "channeling", level: 1 } },
+  { impaling: { name: "impaling", level: 5 } },
+  { loyalty: { name: "loyalty", level: 3 } },
+  { riptide: { name: "riptide", level: 3 } },
+  { quick_charge: { name: "quick_charge", level: 3 } },
+  { piercing: { name: "piercing", level: 4 } },
+  { multishot: { name: "multishot", level: 1 } },
+  // Add more types as needed
+];
 class minecraft {
   //kill all hostile mobs
   async killMods() {
@@ -15,6 +67,12 @@ class minecraft {
     const randomPlayer = players[Math.floor(Math.random() * players.length)];
 
     return randomPlayer;
+  }
+
+  async sendCommand(command: string) {
+    const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
+      command: command,
+    });
   }
 
   //spawn random mob
@@ -93,8 +151,6 @@ class minecraft {
     const data = await pterodactylAPI.post("/client/servers/947aab94/command", {
       command: `nuke`,
     });
-
-    console.log(data);
 
     return "nuke";
   }
@@ -302,6 +358,8 @@ class minecraft {
       player: randomPlayer,
     };
   }
+
+  //spawns strong winds
   async wind() {
     const randomPlayer = this.randomPlayer();
 
@@ -309,9 +367,10 @@ class minecraft {
       command: `disasters start extremewinds 3 ${randomPlayer} `,
     });
 
-    return randomPlayer
+    return randomPlayer;
   }
 
+  //spawns a torando
   async torando() {
     const randomPlayer = this.randomPlayer();
 
@@ -319,8 +378,32 @@ class minecraft {
       command: `disasters start tornado 3 ${randomPlayer} `,
     });
 
-    return randomPlayer
+    return randomPlayer;
   }
+
+  getRandomEnchantedBookTypes(count: number): EnchantedBook[] {
+    const randomTypes: EnchantedBook[] = [];
+
+    for (let i = 0; i < count; i++) {
+      const randomIndex = Math.floor(Math.random() * enchantedBooks.length);
+      const enchantmentName = Object.keys(enchantedBooks[randomIndex])[0];
+      const maxLevel = enchantedBooks[randomIndex][enchantmentName].level;
+      const randomLevel = Math.floor(Math.random() * maxLevel) + 1; // Random level between 1 and maxLevel
+
+      const enchantedBook: EnchantedBook = {
+        [enchantmentName]: {
+          name: enchantmentName,
+          level: randomLevel,
+        },
+      };
+
+      randomTypes.push(enchantedBook);
+    }
+
+    return randomTypes;
+  }
+
+  //spawn a supernova
   async supernova() {
     const randomPlayer = this.randomPlayer();
 
@@ -328,7 +411,43 @@ class minecraft {
       command: `disasters start supernova 1 ${randomPlayer} `,
     });
 
-    return randomPlayer
+    return randomPlayer;
+  }
+
+  async randomBook(lore: string) {
+    const randomPlayer = this.randomPlayer();
+    const randomBook = this.getRandomEnchantedBookTypes(3);
+
+    const randomEnchantedBookTypes = this.getRandomEnchantedBookTypes(3);
+
+    // Format enchantments for the command
+    const enchantmentStrings = randomEnchantedBookTypes.map((book) => {
+      const enchantmentName = Object.keys(book)[0];
+      const enchantmentLevel = book[enchantmentName].level;
+      return `${enchantmentName}:${enchantmentLevel}`;
+    });
+
+    console.log(lore);
+
+    // Create the /give command string
+    const commandString = `give ${randomPlayer} enchanted_book 1 ${enchantmentStrings.join(" ")} lore:&1gifted_by_${lore}`;
+
+    this.sendCommand(commandString);
+    return commandString;
+  }
+
+  //50/50
+  async fiftyFifty(username: string) {
+    const good = Math.random() < 0.5;
+
+    if (good) {
+      this.randomBook(username);
+      return "Players Win"
+    } else {
+      await this.jumpscare_look_at_ender();
+      // await this.torando()
+      return "chat wins"
+    }
   }
 }
 
