@@ -445,7 +445,7 @@ class minecraft {
       return "Players Win"
     } else {
       await this.jumpscare_look_at_ender();
-      // await this.torando()
+      await this.torando()
       return "chat wins"
     }
   }
